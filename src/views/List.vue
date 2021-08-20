@@ -43,7 +43,6 @@
 
 <script>
 import Button from '@/components/Button.vue';
-import { readList, deleteItem, getId } from '@/services/crud.js';
 import { notify } from '@/services/notification.js';
 
 export default {
@@ -62,7 +61,7 @@ export default {
 
     async created() {
         try {
-            this.list = await readList('list');
+            this.list = await this.$firebase.readList('list');
         } catch (error) {
             console.log('Não foi possível conectar ao banco');
         }
@@ -74,9 +73,9 @@ export default {
         },
 
         async removeItem() {
-            const id = await getId('list', this.indexItemSelected);
-            await deleteItem('list', id);
-            this.list = await readList('list');
+            const id = await this.$firebase.getId('list', this.indexItemSelected);
+            await this.$firebase.deleteItem('list', id);
+            this.list = await this.$firebase.readList('list');
             this.hiddenModal = !this.hiddenModal;
             notify(`Item ${this.itemSelected.subject} removido.`)
         },

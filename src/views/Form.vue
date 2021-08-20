@@ -18,7 +18,6 @@
 
 <script>
 import Button from '@/components/Button.vue';
-import { createItem, readList, updateItem, getId } from '@/services/crud.js';
 
 export default {
     name: 'Form',
@@ -38,7 +37,7 @@ export default {
         if (this.$route.params.index !== undefined) {
             try {
                 this.formType = 'Editar';
-                const list = await readList('list');
+                const list = await this.$firebase.readList('list');
                 this.form = list[this.$route.params.index];
             } catch (error) {
                 console.log('Não foi possivel carregar a tarefa.');
@@ -52,15 +51,15 @@ export default {
                 const index = this.$route.params.index;
 
                 try {
-                    const id = await getId('list', index);
-                    await updateItem('list', id, this.form);
+                    const id = await this.$firebase.getId('list', index);
+                    await this.$firebase.updateItem('list', id, this.form);
                     this.$router.push({ name: 'list' });
                 } catch (error) {
                     console.log('Não foi possível atualizar o item.', error);
                 }
             } else {
                 try {
-                    await createItem(this.form);
+                    await this.$firebase.createItem(this.form);
                     this.$router.push({ name: 'list' });
                 } catch (error) {
                     console.log('Não foi possível salvar o item.', error);

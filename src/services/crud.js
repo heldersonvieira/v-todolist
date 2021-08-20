@@ -1,11 +1,11 @@
-import { db } from '@/services/firebase.js';
-
+import { db } from '@/services/connectionFirebase.js';
+// done
 const getId = async (docs, index) => {
     const list = await db.collection(docs).get();
 
     return list.docs[index].id;
 };
-
+//done
 const createItem = async ({ subject, description }) => {
     try {
         return await db.collection('list').add({
@@ -16,7 +16,7 @@ const createItem = async ({ subject, description }) => {
         console.log('Deu erro oh: ', error);
     }
 };
-
+// done
 const readList = async (docs) => {
     try {
         const data = await db.collection(docs).get();
@@ -27,7 +27,7 @@ const readList = async (docs) => {
         throw new Error('Não foi possível carregar as tarefas.');
     }
 };
-
+// done
 const updateItem = async (docs, id, { subject, description }) => {
     const itemSelected = db.collection(docs).doc(id);
 
@@ -36,7 +36,7 @@ const updateItem = async (docs, id, { subject, description }) => {
         description,
     });
 };
-
+// done
 const deleteItem = async (docs, id) => {
     return await db.collection(docs).doc(id).delete();
 };
