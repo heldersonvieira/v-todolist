@@ -1,12 +1,14 @@
 <template>
-    <form class="form">
+    <form class="form" data-form>
         <h3>{{ formType }} item</h3>
         <input
+            data-subject
             type="text"
             placeholder="Ex. Lavar o carro"
             v-model="form.subject"
         />
         <textarea
+            data-description
             v-model="form.description"
             placeholder="Ex. Levar o carro no lava jato Mó limpeza"
         ></textarea>

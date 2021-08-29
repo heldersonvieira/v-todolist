@@ -44,6 +44,7 @@ export default {
     overflow: visible;
     padding: 1rem 2rem;
 }
+
 .nav {
     display: flex;
     align-items: center;

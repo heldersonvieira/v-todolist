@@ -16,7 +16,7 @@ export default {
                         description: description,
                     });
                 } catch (error) {
-                    console.log('Deu erro oh: ', error);
+                    throw new Error('Não foi possível salvar a tarefa');
                 }
             },
 
@@ -24,10 +24,10 @@ export default {
                 try {
                     const data = await db.collection(docs).get();
                     const list = data.docs.map((doc) => doc.data());
-            
+                    console.log(data.docs)
                     return list;
                 } catch (error) {
-                    throw new Error('Não foi possível carregar as tarefas.');
+                    throw new Error(`Não foi possível carregar as tarefas.`);
                 }
             },
 
@@ -44,4 +44,4 @@ export default {
             },
         }
     }
-}
+};

@@ -15,6 +15,9 @@
             </div>
         </div>
 
+        <!--<Modal :class="['modal-overlay', hiddenModal ? 'hidden' : '']" 
+            type="error" // aqui pode ser error ou confirm
+        />-->
         <div :class="['modal-overlay', hiddenModal ? 'hidden' : '']">
             <div class="modal">
                 <div class="content">
@@ -43,11 +46,13 @@
 
 <script>
 import Button from '@/components/Button.vue';
+// import Modal from '@/components/Modal.vue';
 import { notify } from '@/services/notification.js';
 
 export default {
     components: {
         Button,
+        // Modal,
     },
 
     data() {
@@ -63,7 +68,7 @@ export default {
         try {
             this.list = await this.$firebase.readList('list');
         } catch (error) {
-            console.log('Não foi possível conectar ao banco');
+            console.log(error);
         }
     },
 
